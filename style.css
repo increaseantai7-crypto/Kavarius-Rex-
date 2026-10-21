@@ -1,147 +1,888 @@
-<!DOCTYPE html><html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="theme-color" content="#080b14">
-    <meta name="description" content="Discover music, new releases and videos from Kavarius Rex.">
-    <title>Kavarius Rex | Official Music</title>
-    <link rel="stylesheet" href="style.css">
-</head>
-<body><header class="site-header">
-    <a href="#" class="logo">KAVARIUS<span> REX.</span></a>
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap');
 
-    <button class="menu-toggle" id="menuToggle" aria-label="Toggle navigation">
-        ☰
-    </button>
+:root {
+--background: #080b14;
+--surface: #101624;
+--surface-light: #171f30;
+--navy: #0d1930;
+--blue: #557cff;
+--blue-light: #8ca5ff;
+--white: #f5f7ff;
+--muted: #929bb0;
+--border: rgba(255, 255, 255, 0.1);
+--font-main: 'DM Sans', sans-serif;
+--font-heading: 'Space Grotesk', sans-serif;
+}
 
-    <nav class="navigation" id="navigation">
-        <a href="#home">Home</a>
-        <a href="#music">Music</a>
-        <a href="#about">About</a>
-        <button class="account-button" id="accountButton">Listener Login</button>
-    </nav>
-</header>
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  }
 
-<main>
-    <section class="hero" id="home">
-        <div class="hero-content">
-            <p class="eyebrow">THE OFFICIAL MUSIC EXPERIENCE</p>
+html {
+scroll-behavior: smooth;
+scroll-padding-top: 90px;
+}
 
-            <h1>MORE THAN<br><span>JUST MUSIC.</span></h1>
+body {
+background: var(--background);
+color: var(--white);
+font-family: var(--font-main);
+line-height: 1.6;
+overflow-x: hidden;
+}
 
-            <p class="hero-description">
-                Enter the world of Kavarius Rex.
-                Discover the sound, feel the energy, and experience every release.
-            </p>
+body.modal-open {
+overflow: hidden;
+}
 
-            <div class="hero-actions">
-                <a href="#music" class="primary-button">EXPLORE MUSIC ↗</a>
-                <a href="#about" class="secondary-button">DISCOVER THE ARTIST</a>
-            </div>
+a {
+color: inherit;
+text-decoration: none;
+}
 
-            <div class="artist-status">
-                <span class="status-dot"></span>
-                INDEPENDENT ARTIST · ORIGINAL SOUND
-            </div>
-        </div>
+button,
+input {
+font: inherit;
+}
 
-        <div class="hero-visual" aria-label="Kavarius Rex music artwork">
-            <div class="orbit orbit-one"></div>
-            <div class="orbit orbit-two"></div>
+button {
+cursor: pointer;
+}
 
-            <div class="record">
-                <div class="record-grooves"></div>
-                <div class="record-label">
-                    <span>KR</span>
-                    <small>KAVARIUS REX</small>
-                </div>
-            </div>
+button:focus-visible,
+a:focus-visible,
+input:focus-visible {
+outline: 2px solid var(--blue-light);
+outline-offset: 4px;
+}
 
-            <div class="visual-caption">
-                <span>THE SOUND OF REX</span>
-                <span>VOL. 001</span>
-            </div>
-        </div>
-    </section>
+::selection {
+background: var(--blue);
+color: white;
+}
 
-    <section class="music-section" id="music">
-        <div class="section-heading">
-            <div>
-                <p class="eyebrow">YOUR NEXT FAVOURITE SOUND</p>
-                <h2>THE MUSIC <span>ROOM.</span></h2>
-            </div>
-            <p class="section-note">
-                Gospel. Hip-hop. Street sounds.<br>
-                One artist. Different expressions.
-            </p>
-        </div>
+/* HEADER */
 
-        <div class="empty-music">
-            <div class="music-icon">♫</div>
-            <h3>THE NEXT SOUND STARTS HERE.</h3>
-            <p>New music will appear here as releases are added.</p>
-            <span class="coming-soon">MUSIC LIBRARY · COMING SOON</span>
-        </div>
-    </section>
+.site-header {
+width: 100%;
+min-height: 82px;
+padding: 0 7%;
+display: flex;
+justify-content: space-between;
+align-items: center;
+border-bottom: 1px solid var(--border);
+background: rgba(8, 11, 20, 0.92);
+position: sticky;
+top: 0;
+z-index: 100;
+backdrop-filter: blur(18px);
+}
 
-    <section class="about-section" id="about">
-        <p class="eyebrow">MEET THE ARTIST</p>
-        <h2>ONE NAME.<br><span>EVERY EXPRESSION.</span></h2>
-        <p>
-            Welcome to the official home of Kavarius Rex.
-            A space for music, creativity, and every sound still waiting to be heard.
-        </p>
-    </section>
-</main>
+.logo {
+font-family: var(--font-heading);
+font-size: 20px;
+font-weight: 700;
+letter-spacing: 1.5px;
+white-space: nowrap;
+}
 
-<footer class="site-footer">
-    <a href="#home" class="logo">KAVARIUS<span> REX.</span></a>
-    <p>© <span id="currentYear"></span> Kavarius Rex. All rights reserved.</p>
-    <a href="#home" class="back-to-top">BACK TO TOP ↑</a>
-</footer>
+.logo span {
+color: var(--blue-light);
+}
 
-<div class="welcome-overlay" id="welcomeOverlay" role="dialog"
-     aria-modal="true" aria-labelledby="welcomeTitle" hidden>
-    <div class="welcome-card">
-        <p class="eyebrow">WELCOME TO THE MUSIC ROOM</p>
+.navigation {
+display: flex;
+align-items: center;
+gap: 34px;
+}
 
-        <h2 id="welcomeTitle">YOUR MUSIC.<br><span>YOUR EXPERIENCE.</span></h2>
+.navigation > a {
+font-size: 13px;
+color: var(--muted);
+transition: color 0.25s ease;
+}
 
-        <p class="welcome-description">
-            How would you like to explore Kavarius Rex?
-        </p>
+.navigation > a:hover {
+color: var(--white);
+}
 
-        <button class="visitor-choice" data-choice="guest">
-            <span class="choice-icon">◉</span>
-            <span>
-                <strong>I'm Just Visiting</strong>
-                <small>Explore and listen without an account.</small>
-            </span>
-            <span class="choice-arrow">↗</span>
-        </button>
+.account-button {
+background: transparent;
+border: 1px solid rgba(140, 165, 255, 0.5);
+color: var(--white);
+padding: 11px 17px;
+border-radius: 5px;
+font-size: 12px;
+font-weight: 700;
+transition: background 0.25s ease;
+}
 
-        <button class="visitor-choice" data-choice="listener">
-            <span class="choice-icon">♫</span>
-            <span>
-                <strong>I'm a Regular Listener</strong>
-                <small>Sign in or create your listener account.</small>
-            </span>
-            <span class="choice-arrow">↗</span>
-        </button>
+.account-button:hover {
+background: rgba(85, 124, 255, 0.15);
+}
 
-        <label class="remember-choice">
-            <input type="checkbox" id="rememberChoice">
-            <span class="custom-checkbox"></span>
-            Remember my choice on this device
-        </label>
+.menu-toggle {
+display: none;
+color: var(--white);
+background: transparent;
+border: 1px solid var(--border);
+border-radius: 5px;
+padding: 7px 12px;
+font-size: 22px;
+}
 
-        <p class="privacy-note">
-            You can change your experience at any time.
-        </p>
-    </div>
-</div>
+/* HERO SECTION */
 
-<script src="script.js"></script>
+.hero {
+min-height: 660px;
+padding: 90px 7% 100px;
+display: grid;
+grid-template-columns: 1.1fr 0.9fr;
+align-items: center;
+gap: 50px;
+position: relative;
+isolation: isolate;
+overflow: hidden;
+}
 
-</body>
-</html>
+.hero::before {
+content: "";
+position: absolute;
+width: 520px;
+height: 520px;
+right: 4%;
+top: 5%;
+background: radial-gradient(
+circle,
+rgba(44, 83, 190, 0.18),
+transparent 70%
+);
+z-index: -1;
+pointer-events: none;
+}
+
+.hero-content {
+max-width: 650px;
+animation: fade-up 0.8s ease both;
+}
+
+.eyebrow {
+color: var(--blue-light);
+font-size: 10px;
+font-weight: 800;
+letter-spacing: 3px;
+margin-bottom: 22px;
+}
+
+.hero h1 {
+font-family: var(--font-heading);
+font-size: clamp(46px, 6.3vw, 86px);
+line-height: 0.99;
+letter-spacing: -3px;
+font-weight: 700;
+}
+
+.hero h1 span,
+.section-heading h2 span,
+.about-section h2 span,
+.welcome-card h2 span {
+color: var(--blue-light);
+}
+
+.hero-description {
+color: var(--muted);
+font-size: 14px;
+line-height: 1.9;
+max-width: 430px;
+margin: 28px 0;
+}
+
+.hero-actions {
+display: flex;
+align-items: center;
+gap: 13px;
+flex-wrap: wrap;
+}
+
+.primary-button,
+.secondary-button {
+min-height: 48px;
+padding: 14px 19px;
+border-radius: 4px;
+font-size: 10px;
+font-weight: 800;
+letter-spacing: 0.7px;
+display: inline-flex;
+align-items: center;
+justify-content: center;
+transition: transform 0.25s ease, background 0.25s ease;
+}
+
+.primary-button {
+background: var(--blue);
+color: white;
+}
+
+.primary-button:hover {
+background: #6c8bff;
+transform: translateY(-3px);
+}
+
+.secondary-button {
+border: 1px solid var(--border);
+color: var(--white);
+}
+
+.secondary-button:hover {
+background: var(--surface);
+}
+
+.artist-status {
+margin-top: 48px;
+display: flex;
+align-items: center;
+gap: 10px;
+color: var(--muted);
+font-size: 9px;
+letter-spacing: 1.2px;
+font-weight: 700;
+}
+
+.status-dot {
+width: 7px;
+height: 7px;
+background: #6fdbad;
+border-radius: 50%;
+box-shadow: 0 0 12px rgba(111, 219, 173, 0.5);
+}
+
+/* VINYL RECORD VISUAL */
+
+.hero-visual {
+min-height: 400px;
+display: flex;
+align-items: center;
+justify-content: center;
+position: relative;
+}
+
+.record {
+width: min(330px, 76vw);
+aspect-ratio: 1;
+border-radius: 50%;
+background:
+repeating-radial-gradient(
+circle at center,
+#171d2b 0px,
+#171d2b 2px,
+#0b0e16 3px,
+#111827 5px,
+#0b0e16 7px
+);
+box-shadow:
+0 30px 80px rgba(0, 0, 0, 0.5),
+0 0 70px rgba(85, 124, 255, 0.13),
+inset 0 0 20px rgba(0, 0, 0, 0.7);
+display: flex;
+align-items: center;
+justify-content: center;
+position: relative;
+animation: record-spin 24s linear infinite;
+}
+
+.record::after {
+content: "";
+position: absolute;
+inset: 8px;
+border: 1px solid rgba(255, 255, 255, 0.08);
+border-radius: 50%;
+}
+
+.record-label {
+width: 34%;
+aspect-ratio: 1;
+border-radius: 50%;
+background: linear-gradient(145deg, #182b5a, #557cff);
+display: flex;
+flex-direction: column;
+align-items: center;
+justify-content: center;
+gap: 5px;
+border: 4px solid #101624;
+box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.12);
+animation: record-spin 24s linear infinite reverse;
+}
+
+.record-label span {
+font-family: var(--font-heading);
+font-size: 34px;
+font-weight: 700;
+letter-spacing: -2px;
+}
+
+.record-label small {
+font-size: 5px;
+letter-spacing: 1px;
+font-weight: 800;
+}
+
+.orbit {
+position: absolute;
+width: 390px;
+height: 390px;
+border: 1px solid rgba(140, 165, 255, 0.15);
+border-radius: 50%;
+pointer-events: none;
+}
+
+.orbit-two {
+width: 450px;
+height: 450px;
+border-style: dashed;
+border-color: rgba(140, 165, 255, 0.08);
+}
+
+.visual-caption {
+position: absolute;
+bottom: 2px;
+width: min(390px, 90%);
+display: flex;
+justify-content: space-between;
+color: var(--muted);
+font-size: 9px;
+font-weight: 700;
+letter-spacing: 1.5px;
+}
+
+/* MUSIC SECTION */
+
+.music-section {
+padding: 95px 7%;
+background: linear-gradient(
+180deg,
+#0c1120,
+#0a0e19
+);
+border-top: 1px solid var(--border);
+border-bottom: 1px solid var(--border);
+}
+
+.section-heading {
+display: flex;
+justify-content: space-between;
+align-items: end;
+gap: 30px;
+margin-bottom: 40px;
+}
+
+.section-heading .eyebrow {
+margin-bottom: 13px;
+}
+
+.section-heading h2,
+.about-section h2 {
+font-family: var(--font-heading);
+font-size: clamp(34px, 5vw, 55px);
+line-height: 1.1;
+letter-spacing: -1.8px;
+}
+
+.section-note {
+color: var(--muted);
+font-size: 12px;
+line-height: 1.9;
+text-align: right;
+}
+
+.empty-music {
+min-height: 285px;
+border: 1px dashed rgba(140, 165, 255, 0.25);
+background:
+radial-gradient(
+ellipse at center,
+rgba(40, 67, 137, 0.12),
+transparent 70%
+),
+var(--surface);
+display: flex;
+flex-direction: column;
+align-items: center;
+justify-content: center;
+text-align: center;
+padding: 30px 20px;
+}
+
+.music-icon {
+font-size: 38px;
+color: var(--blue-light);
+margin-bottom: 15px;
+}
+
+.empty-music h3 {
+font-family: var(--font-heading);
+font-size: 16px;
+letter-spacing: 1px;
+}
+
+.empty-music p {
+color: var(--muted);
+font-size: 12px;
+margin-top: 8px;
+}
+
+.coming-soon {
+display: inline-block;
+margin-top: 22px;
+padding: 7px 11px;
+border: 1px solid var(--border);
+border-radius: 3px;
+color: var(--blue-light);
+font-size: 8px;
+font-weight: 800;
+letter-spacing: 1.5px;
+}
+
+/* ABOUT SECTION */
+
+.about-section {
+padding: 110px 7%;
+text-align: center;
+background:
+radial-gradient(
+ellipse at 50% 100%,
+rgba(37, 66, 140, 0.16),
+transparent 65%
+),
+var(--background);
+}
+
+.about-section .eyebrow {
+margin-bottom: 18px;
+}
+
+.about-section h2 {
+margin-bottom: 22px;
+}
+
+.about-section > p:last-child {
+max-width: 520px;
+margin: 0 auto;
+color: var(--muted);
+font-size: 13px;
+line-height: 2;
+}
+
+/* FOOTER */
+
+.site-footer {
+padding: 27px 7%;
+border-top: 1px solid var(--border);
+display: flex;
+align-items: center;
+justify-content: space-between;
+gap: 20px;
+}
+
+.site-footer .logo {
+font-size: 14px;
+}
+
+.site-footer p,
+.back-to-top {
+font-size: 10px;
+color: var(--muted);
+}
+
+.back-to-top {
+font-weight: 800;
+letter-spacing: 1px;
+}
+
+.back-to-top:hover {
+color: var(--blue-light);
+}
+
+/* WELCOME SCREEN */
+
+.welcome-overlay[hidden] {
+display: none !important;
+}
+
+.welcome-overlay {
+position: fixed;
+inset: 0;
+z-index: 1000;
+display: flex;
+align-items: center;
+justify-content: center;
+overflow-y: auto;
+padding: 22px;
+background: rgba(3, 5, 11, 0.88);
+backdrop-filter: blur(14px);
+animation: fade-in 0.3s ease both;
+}
+
+.welcome-card {
+width: 100%;
+max-width: 460px;
+padding: 38px;
+background:
+radial-gradient(
+ellipse at top right,
+rgba(85, 124, 255, 0.12),
+transparent 55%
+),
+#101624;
+border: 1px solid rgba(140, 165, 255, 0.2);
+border-radius: 9px;
+box-shadow: 0 25px 100px rgba(0, 0, 0, 0.5);
+animation: fade-up 0.4s ease both;
+}
+
+.welcome-card .eyebrow {
+font-size: 8px;
+letter-spacing: 2px;
+margin-bottom: 17px;
+}
+
+.welcome-card h2 {
+font-family: var(--font-heading);
+font-size: clamp(29px, 7vw, 40px);
+line-height: 1.1;
+letter-spacing: -1.4px;
+}
+
+.welcome-description {
+margin: 17px 0 23px;
+font-size: 12px;
+color: var(--muted);
+}
+
+.visitor-choice {
+width: 100%;
+min-height: 75px;
+padding: 14px;
+margin-bottom: 11px;
+display: flex;
+align-items: center;
+gap: 13px;
+text-align: left;
+color: var(--white);
+background: rgba(255, 255, 255, 0.025);
+border: 1px solid var(--border);
+border-radius: 5px;
+transition: border-color 0.2s ease, background 0.2s ease;
+}
+
+.visitor-choice:hover {
+border-color: var(--blue-light);
+background: rgba(85, 124, 255, 0.08);
+}
+
+.choice-icon {
+width: 36px;
+height: 36px;
+flex-shrink: 0;
+display: flex;
+align-items: center;
+justify-content: center;
+background: rgba(85, 124, 255, 0.12);
+border-radius: 5px;
+color: var(--blue-light);
+font-size: 20px;
+}
+
+.visitor-choice > span:nth-child(2) {
+display: flex;
+flex: 1;
+flex-direction: column;
+gap: 4px;
+}
+
+.visitor-choice strong {
+font-size: 12px;
+}
+
+.visitor-choice small {
+color: var(--muted);
+font-size: 10px;
+line-height: 1.5;
+}
+
+.choice-arrow {
+color: var(--blue-light);
+font-size: 18px;
+}
+
+.remember-choice {
+display: flex;
+align-items: center;
+gap: 10px;
+margin-top: 21px;
+font-size: 11px;
+color: #c1c8d8;
+cursor: pointer;
+}
+
+.remember-choice input {
+accent-color: var(--blue);
+width: 16px;
+height: 16px;
+flex-shrink: 0;
+}
+
+.privacy-note {
+margin-top: 18px;
+font-size: 10px;
+color: var(--muted);
+text-align: center;
+}
+
+/* ANIMATIONS */
+
+@keyframes record-spin {
+from {
+transform: rotate(0deg);
+}
+
+to {
+    transform: rotate(360deg);
+}
+
+}
+
+@keyframes fade-up {
+from {
+opacity: 0;
+transform: translateY(18px);
+}
+
+to {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+}
+
+@keyframes fade-in {
+from {
+opacity: 0;
+}
+
+to {
+    opacity: 1;
+}
+
+}
+
+/* TABLETS AND PHONES */
+
+@media (max-width: 900px) {
+.site-header {
+padding: 0 5%;
+min-height: 72px;
+}
+
+.navigation {
+    gap: 20px;
+}
+
+.hero {
+    padding: 75px 5%;
+    gap: 20px;
+}
+
+.hero h1 {
+    font-size: clamp(43px, 7vw, 66px);
+}
+
+.record {
+    width: min(290px, 65vw);
+}
+
+.orbit {
+    width: 330px;
+    height: 330px;
+}
+
+.orbit-two {
+    width: 370px;
+    height: 370px;
+}
+
+.music-section,
+.about-section {
+    padding-left: 5%;
+    padding-right: 5%;
+}
+
+}
+
+@media (max-width: 650px) {
+.site-header {
+min-height: 68px;
+}
+
+.logo {
+    font-size: 17px;
+}
+
+.menu-toggle {
+    display: block;
+}
+
+.navigation {
+    display: none;
+    position: absolute;
+    top: 68px;
+    left: 0;
+    right: 0;
+    padding: 22px 5% 25px;
+    background: #0d1321;
+    border-bottom: 1px solid var(--border);
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0;
+}
+
+.navigation.open {
+    display: flex;
+}
+
+.navigation > a {
+    padding: 13px 0;
+    border-bottom: 1px solid var(--border);
+}
+
+.account-button {
+    margin-top: 15px;
+    min-height: 43px;
+}
+
+.hero {
+    min-height: auto;
+    padding: 65px 6% 55px;
+    grid-template-columns: 1fr;
+    gap: 35px;
+}
+
+.hero h1 {
+    font-size: clamp(43px, 12vw, 66px);
+    letter-spacing: -2px;
+}
+
+.hero-description {
+    font-size: 13px;
+    margin: 21px 0;
+}
+
+.hero-actions {
+    gap: 10px;
+}
+
+.primary-button,
+.secondary-button {
+    font-size: 9px;
+    padding: 13px 14px;
+}
+
+.artist-status {
+    margin-top: 30px;
+    font-size: 8px;
+}
+
+.hero-visual {
+    min-height: 330px;
+}
+
+.record {
+    width: min(270px, 68vw);
+}
+
+.record-label span {
+    font-size: 28px;
+}
+
+.orbit {
+    width: min(320px, 85vw);
+    height: min(320px, 85vw);
+}
+
+.orbit-two {
+    width: min(350px, 93vw);
+    height: min(350px, 93vw);
+}
+
+.visual-caption {
+    bottom: -3px;
+    width: 85%;
+}
+
+.music-section {
+    padding: 70px 6%;
+}
+
+.section-heading {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 13px;
+    margin-bottom: 28px;
+}
+
+.section-heading h2,
+.about-section h2 {
+    font-size: 36px;
+}
+
+.section-note {
+    text-align: left;
+}
+
+.empty-music {
+    min-height: 255px;
+    padding: 25px 15px;
+}
+
+.empty-music h3 {
+    font-size: 14px;
+}
+
+.empty-music p {
+    max-width: 250px;
+    line-height: 1.8;
+}
+
+.about-section {
+    padding: 80px 6%;
+}
+
+.site-footer {
+    padding: 24px 6%;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+}
+
+.welcome-overlay {
+    padding: 14px;
+    align-items: center;
+}
+
+.welcome-card {
+    padding: 27px 21px;
+}
+
+}
+
+@media (prefers-reduced-motion: reduce) {
+*,
+*::before,
+*::after {
+scroll-behavior: auto !important;
+animation-duration: 0.01ms !important;
+animation-iteration-count: 1 !important;
+transition-duration: 0.01ms !important;
+}
+}
